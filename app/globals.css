@@ -19,14 +19,36 @@ body {
   color: var(--color-lightgrey);
   font-family: var(--font-montserrat), sans-serif;
 }
-h1,
-h2,
-h3 {
+
+h1 {
+  font-weight: 550;
+  font-size: 2rem;
   color: var(--color-redorange);
 }
 
+h2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--color-gold);
+}
+
+h3 {
+  font-weight: 475;
+  font-size: 1rem;
+  color: var(--color-lightgrey);
+}
+
+.text-charcoal-bg {
+  display: block;
+  width: fit-content;
+  margin: 0.5rem auto;
+  background-color: var(--color-charcoal);
+  padding: 0.1em 0.3em;
+  line-height: 1.1;
+}
+
 a {
-  color: var(--color-white);
+  color: var(--color-lightgrey);
   text-decoration: none;
 }
 
