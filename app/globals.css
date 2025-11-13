@@ -41,3 +41,11 @@ button {
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
+
+.burger-btn {
+  background-color: transparent;
+  color: var(--color-lightgrey);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
