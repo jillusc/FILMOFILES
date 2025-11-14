@@ -21,7 +21,9 @@ export default function FilmCard({ film, gridView = true }: Props) {
       <div className="flex flex-col grow gap-3 p-4 text-left">
         <div className="flex justify-between items-center">
           {gridView ? <h3>{film.title}</h3> : <h2>{film.title}</h2>}
-          <p>{film.release_date?.slice(0, 4)}</p>
+          <p className="text-lightgrey hover:text-lightgrey">
+            {film.release_date?.slice(0, 4)}
+          </p>
         </div>
         {!gridView && <p>{film.overview}</p>}
       </div>
