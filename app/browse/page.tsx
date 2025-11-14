@@ -1,10 +1,10 @@
-import { FilmCard } from "@/app/components";
-import singleDummyFilm from "../data/singleDummyFilm";
+import { FilmsGrid } from "@/app/components";
+import dummyData from "../data/dummyData";
 
 export default function Page() {
   return (
     <main className="text-center my-4 p-4">
-      <FilmCard film={singleDummyFilm} />
+      <FilmsGrid films={dummyData} />
     </main>
   );
 }
