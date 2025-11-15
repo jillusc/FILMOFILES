@@ -1,11 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FilmsGrid, SearchBar, SorterDropdown } from "@/app/components";
+import {
+  FilmsGrid,
+  GenresSidebar,
+  SearchBar,
+  SorterDropdown,
+} from "@/app/components";
 
 export default function Page() {
   const [films, setFilms] = useState([]);
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -16,12 +22,20 @@ export default function Page() {
       try {
         setLoading(true);
         setError("");
+        // Build the correct TMDB URL based on the current state:
         const url =
-          searchTerm.trim() === ""
-            ? `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
-            : `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+          // 1. If the user typed in the search bar → search endpoint:
+          searchTerm.trim() !== ""
+            ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
                 searchTerm
-              )}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`;
+              )}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
+            : // 2. Else if they selected a genre → discover endpoint (filter by genre):
+              selectedGenre
+              ? `https://api.themoviedb.org/3/discover/movie?with_genres=${
+                  selectedGenre
+                }&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
+              : // 3. Otherwise → fetch the default popular films:
+                `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`;
         // send the request and wait for the server’s response:
         const res = await fetch(url);
         // "if the server replied with an error..."
@@ -45,7 +59,7 @@ export default function Page() {
     }
 
     fetchFilms(); // call the function
-  }, [searchTerm]);
+  }, [searchTerm, selectedGenre]);
 
   // Provide fallback UI while data is loading, handle fetch errors,
   // and prevent crashes if required data is missing:
@@ -68,7 +82,19 @@ export default function Page() {
           onSelectSortOrder={setSortOrder}
         />
       </div>
-      <FilmsGrid films={films} sortOrder={sortOrder} />
+
+      {/* Sidebar - hidden on tablet + mobile: */}
+      <div className="flex gap-8">
+        <div className="hidden lg:block">
+          <GenresSidebar
+            selectedGenre={selectedGenre}
+            onSelectGenre={setSelectedGenre}
+          />
+        </div>
+        <div className="flex-1">
+          <FilmsGrid films={films} sortOrder={sortOrder} />
+        </div>{" "}
+      </div>
     </main>
   );
 }
