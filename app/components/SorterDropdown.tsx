@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 
 interface Props {
@@ -20,12 +20,29 @@ export default function SorterDropdown({
   onSelectSortOrder,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const current = sortOptions.find((o) => o.value === sortOrder);
 
   return (
     <div className="px-10 flex justify-end">
-      <div className="relative inline-block">
+      <div ref={dropdownRef} className="relative inline-block">
         <button onClick={() => setOpen(!open)} className="dropdown-btn">
           {current ? current.label : "Popularity"}
           <FaCaretDown className="h-4 w-4 ml-2 text-lightgrey" />
