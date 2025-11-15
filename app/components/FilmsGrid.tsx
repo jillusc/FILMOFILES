@@ -22,7 +22,7 @@ export default function FilmsGrid({ films, sortOrder }: Props) {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       {sorted.map((film) => (
         <Link
           key={film.id}
