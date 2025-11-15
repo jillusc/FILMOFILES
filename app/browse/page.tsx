@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FilmsGrid } from "@/app/components";
+import { FilmsGrid, SorterDropdown } from "@/app/components";
 
 export default function Page() {
   const [films, setFilms] = useState([]);
+  const [sortOrder, setSortOrder] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -51,7 +52,8 @@ export default function Page() {
 
   return (
     <main className="text-center my-4 p-4">
-      <FilmsGrid films={films} />
+      <SorterDropdown sortOrder={sortOrder} onSelectSortOrder={setSortOrder} />
+      <FilmsGrid films={films} sortOrder={sortOrder} />
     </main>
   );
 }
