@@ -1,15 +1,19 @@
 interface Props {
   searchTerm: string;
   onSearchTermChange: (value: string) => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function SearchBar({ searchTerm, onSearchTermChange }: Props) {
+function SearchBar({ searchTerm, onSearchTermChange, setPage }: Props) {
   return (
     <div className="w-full">
       <input
         type="text"
         value={searchTerm}
-        onChange={(e) => onSearchTermChange(e.target.value)}
+        onChange={(e) => {
+          onSearchTermChange(e.target.value);
+          setPage(1);
+        }}
         placeholder="Search all films..."
         className="
     w-full

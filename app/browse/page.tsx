@@ -13,6 +13,7 @@ export default function Page() {
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -29,14 +30,14 @@ export default function Page() {
           searchTerm.trim() !== ""
             ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
                 searchTerm
-              )}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
+              )}&page=${page}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
             : // 2. Else if they selected a genre → discover endpoint (filter by genre):
               selectedGenre
               ? `https://api.themoviedb.org/3/discover/movie?with_genres=${
                   selectedGenre
-                }&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
+                }&page=${page}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`
               : // 3. Otherwise → fetch the default popular films:
-                `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`;
+                `https://api.themoviedb.org/3/movie/popular?page=${page}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&include_adult=false`;
         // send the request and wait for the server’s response:
         const res = await fetch(url);
         // "if the server replied with an error..."
@@ -49,15 +50,29 @@ export default function Page() {
           return; // and stop here.
         }
         // otherwise, convert the response body so we can use the data:
-        const data = await res.json();
+        const data: { results: Film[] } = await res.json();
         const bestResults = data.results.filter(
-          (film: Film) =>
+          (film) =>
             film.poster_path &&
             film.title &&
             film.vote_average !== undefined &&
             film.vote_average !== 0
         );
-        setFilms(bestResults); // store it in state
+        // store in state:
+        // if this is page 1, replace the whole list (a brand-new search/genre/pagination reset):
+        if (page === 1) {
+          setFilms(bestResults);
+        } else {
+          // if this is page 2 or higher, add the new films onto the end of the existing list:
+          setFilms((prev) => {
+            // check the IDs of the existing films and skip any new ones that match:
+            const existingIds = new Set(prev.map((film) => film.id));
+            const noDuplicates = bestResults.filter(
+              (film) => !existingIds.has(film.id)
+            );
+            return [...prev, ...noDuplicates];
+          });
+        }
       } catch (err) {
         console.error("Network error:", err);
         setError("Network error — cannot reach server.");
@@ -67,13 +82,13 @@ export default function Page() {
     }
 
     fetchFilms(); // call the function
-  }, [searchTerm, selectedGenre]);
+  }, [searchTerm, selectedGenre, page]);
 
   // Provide fallback UI while data is loading, handle fetch errors,
   // and prevent crashes if required data is missing:
-  {
-    loading && <p>Loading films...</p>; // stops the page unmounting and the input losing focus
-  }
+  //{
+  //  loading && <p>Loading films...</p>; // moved inside the return...
+  //}
   if (error) return <p>{error}</p>;
   if (!loading && films.length === 0) {
     return (
@@ -83,13 +98,14 @@ export default function Page() {
 
   return (
     <main className="mx-10 mb-6 p-4 pt-6">
-      <div
-        className="
-    flex flex-col gap-4 mb-6
-    lg:flex-row lg:items-center lg:justify-between
-  "
-      >
-        <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
+      {/* ...moved here so that the page stays mounted while loading, allowing the search bar to keep its focus: */}
+      {loading && <p className="my-6 text-center">Loading films...</p>}
+      <div className="flex flex-col gap-4 mb-6 lg:flex-row lg:items-center lg:justify-between">
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchTermChange={setSearchTerm}
+          setPage={setPage}
+        />
         <SorterDropdown
           sortOrder={sortOrder}
           onSelectSortOrder={setSortOrder}
@@ -102,11 +118,20 @@ export default function Page() {
           <GenresSidebar
             selectedGenre={selectedGenre}
             onSelectGenre={setSelectedGenre}
+            setPage={setPage}
           />
         </div>
         <div className="flex-1">
           <FilmsGrid films={films} sortOrder={sortOrder} />
-        </div>{" "}
+          <div className="flex justify-end mt-8">
+            <button
+              onClick={() => setPage((prev) => prev + 1)}
+              className="loadmore-btn"
+            >
+              Load More
+            </button>
+          </div>
+        </div>
       </div>
     </main>
   );

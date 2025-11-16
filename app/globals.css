@@ -56,13 +56,20 @@ a:hover {
   color: var(--color-blue);
 }
 
-/* button {
+.loadmore-btn {
   background-color: var(--color-gold);
+  font-size: 0.875rem;
   color: var(--color-charcoal);
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
   cursor: pointer;
-} */
+}
+
+.loadmore-btn:hover {
+  background-color: var(--color-blue);
+  color: var(--color-lightgrey);
+}
 
 .burger-btn {
   background-color: transparent;

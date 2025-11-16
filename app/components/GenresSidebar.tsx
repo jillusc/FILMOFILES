@@ -3,9 +3,14 @@ import { genres } from "@/app/data/genres";
 interface Props {
   selectedGenre: number | null;
   onSelectGenre: (value: number) => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function GenreSidebar({ selectedGenre, onSelectGenre }: Props) {
+export default function GenreSidebar({
+  selectedGenre,
+  onSelectGenre,
+  setPage,
+}: Props) {
   return (
     <aside className="w-[18%]">
       <h2 className="mb-4 text-lg font-semibold text-lightgrey ml-2.5">
@@ -19,7 +24,10 @@ export default function GenreSidebar({ selectedGenre, onSelectGenre }: Props) {
           return (
             <li key={genre.id}>
               <button
-                onClick={() => onSelectGenre(genre.id)}
+                onClick={() => {
+                  onSelectGenre(genre.id);
+                  setPage(1);
+                }}
                 className={`
                   w-35
                   text-sm
