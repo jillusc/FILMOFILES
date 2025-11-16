@@ -75,7 +75,12 @@ export default function Page() {
 
   return (
     <main className="mx-10 mb-6 p-4 pt-6">
-      <div className="flex items-center justify-between gap-8 mb-6">
+      <div
+        className="
+    flex flex-col gap-4 mb-6
+    lg:flex-row lg:items-center lg:justify-between
+  "
+      >
         <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
         <SorterDropdown
           sortOrder={sortOrder}

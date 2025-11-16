@@ -41,7 +41,7 @@ export default function SorterDropdown({
   const current = sortOptions.find((o) => o.value === sortOrder);
 
   return (
-    <div className="px-10 flex justify-end">
+    <div className="flex justify-end">
       <div ref={dropdownRef} className="relative inline-block">
         <button onClick={() => setOpen(!open)} className="dropdown-btn">
           {current ? current.label : "Popularity"}
