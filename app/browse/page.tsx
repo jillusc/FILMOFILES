@@ -6,9 +6,10 @@ import {
   SearchBar,
   SorterDropdown,
 } from "@/app/components";
+import type { Film } from "@/app/types";
 
 export default function Page() {
-  const [films, setFilms] = useState([]);
+  const [films, setFilms] = useState<Film[]>([]);
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
@@ -49,7 +50,14 @@ export default function Page() {
         }
         // otherwise, convert the response body so we can use the data:
         const data = await res.json();
-        setFilms(data.results); // store it in state
+        const bestResults = data.results.filter(
+          (film: Film) =>
+            film.poster_path &&
+            film.title &&
+            film.vote_average !== undefined &&
+            film.vote_average !== 0
+        );
+        setFilms(bestResults); // store it in state
       } catch (err) {
         console.error("Network error:", err);
         setError("Network error — cannot reach server.");
