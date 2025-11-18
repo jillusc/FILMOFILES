@@ -92,7 +92,16 @@ export default function Page() {
   if (error) return <p>{error}</p>;
   if (!loading && films.length === 0) {
     return (
-      <p className="my-6 text-center">No results found. Try another search!</p>
+      <div className="my-6 text-center">
+        <p>No results found. Try another search!</p>
+        <a
+          href="/browse"
+          className="mt-4 inline-flex items-center justify-center"
+        >
+          <span className="text-3xl">◂</span>
+          <span>BACK</span>
+        </a>
+      </div>
     );
   }
 
