@@ -1,3 +1,4 @@
+export { default as Accordion } from "./Accordion";
 export { default as CTABox } from "./CTABox";
 export { default as FilmCard } from "./FilmCard";
 export { default as FilmsGrid } from "./FilmsGrid";

@@ -1,3 +1,5 @@
+import { Accordion } from "@/app/components";
+
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl p-6 mb-4">
@@ -45,32 +47,29 @@ export default function AboutPage() {
 
         <section>
           <h2>FAQ</h2>
-          <p className="font-bold">
-            Q1. Was Filmofiles always a front-end app?
-          </p>
-          <p>
-            No - the original version was a full-stack film review community
+          <Accordion
+            question="Q1. Was Filmofiles always a front-end app?"
+            answer="No - the original version was a full-stack film review community
             built with Django and PostgreSQL - a platform where users could
             register, write reviews, post comments and interact with like-minded
-            film fans.
-          </p>
-          <p className="font-bold mt-6">Q2. Why rebuild Filmofiles?</p>
-          <p>
+            film fans."
+          />
+          <Accordion
+            question="Q2. Why rebuild Filmofiles?"
+            answer="
             This version is a fresh, streamlined rebuild using modern front-end
             technologies and is focused on clean UI, smooth performance and
-            accessibility - without the need to maintain a backend.
-          </p>
-          <p className="font-bold mt-6">
-            Q3. Will Filmofiles get user reviews, profiles or comments again?
-          </p>
-          <p>
-            Possibly. The current version is intentionally a front-end only
+            accessibility - without the need to maintain a backend."
+          />
+          <Accordion
+            question="Q3. Will Filmofiles get user reviews, profiles or comments again?"
+            answer="Possibly. The current version is intentionally a front-end only
             browsing app. Future updates may expand it into a social,
-            review-driven platform again.
-          </p>
+            review-driven platform again."
+          />
         </section>
 
-        <hr className="border-[#154646]" />
+        <hr className="border-darkteal" />
 
         <section>
           <h2>Credits</h2>
