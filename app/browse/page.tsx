@@ -142,6 +142,22 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <a
+        href="#top"
+        className="
+    fixed bottom-6 right-6 z-50
+    flex items-center justify-center
+    h-8 w-8 rounded-full
+    text-xl leading-none
+    bg-darkteal
+    text-lightgrey
+    hover:bg-[#154646]
+    hover:text-[#ededed!important]
+    hover:border border-redorange
+  "
+      >
+        ▲
+      </a>
     </main>
   );
 }
