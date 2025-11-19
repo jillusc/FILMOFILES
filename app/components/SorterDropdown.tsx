@@ -12,7 +12,8 @@ const sortOptions = [
   { value: "az", label: "Title (A–Z)" },
   { value: "za", label: "Title (Z–A)" },
   { value: "rating", label: "Rating" },
-  { value: "newest", label: "Release Date (Newest)" },
+  { value: "newest", label: "Release (Newest)" },
+  { value: "oldest", label: "Release (Oldest)" },
 ];
 
 export default function SorterDropdown({

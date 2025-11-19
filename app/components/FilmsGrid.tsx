@@ -18,6 +18,11 @@ export default function FilmsGrid({ films, sortOrder }: Props) {
         new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
       );
     }
+    if (sortOrder === "oldest") {
+      return (
+        new Date(a.release_date).getTime() - new Date(b.release_date).getTime()
+      );
+    }
     return 0; // otherwise, no sorting selected
   });
 
