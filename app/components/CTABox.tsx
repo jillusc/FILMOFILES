@@ -11,7 +11,7 @@ export default function CTABox() {
         <Link href="/browse" aria-label="Browse films">
           <h1 className="mb-4 text-redorange text-2xl!">BROWSE</h1>
         </Link>
-        <p>Take a look at our users' latest reviews and recommendations.</p>
+        <p>Take a look at our users&#39; latest reviews and recommendations.</p>
       </div>
     </div>
   );

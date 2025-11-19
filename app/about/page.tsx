@@ -1,4 +1,5 @@
 import { Accordion } from "@/app/components";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
@@ -37,9 +38,10 @@ export default function AboutPage() {
             The visual design of Filmofiles is inspired by the atmosphere of a
             darkened cinema. Its base palette of deep teal and charcoal is
             paired with vibrant accents, evocative of artificial light cutting
-            through darkness. The logo's typeface has a grainy character with
-            horizontal streaks, making it reminiscent of an old VHS label and
-            adding a nostalgic nod to another classic medium of film watching.
+            through darkness. The logo&#39;s typeface has a grainy character
+            with horizontal streaks, making it reminiscent of an old VHS label
+            and adding a nostalgic nod to another classic medium of film
+            watching.
           </p>
         </section>
 
@@ -103,7 +105,7 @@ export default function AboutPage() {
           <p>
             Promotional film poster images used in this project belong to their
             respective copyright holders. Cinema background photography and the
-            <a href="/not-found"> 404 page</a>'s popcorn image from{" "}
+            <a href="/not-found"> 404 page</a>&#39;s popcorn image from{" "}
             <a
               href="https://pixabay.com/"
               target="_blank"
@@ -115,28 +117,48 @@ export default function AboutPage() {
           </p>
           <p className="font-bold mt-6">Frameworks & Tools</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 place-items-center my-6">
-            <img src="/tmdb-logo.png" alt="TMDb logo" className="w-14 h-auto" />
-            <img
+            <Image
+              src="/tmdb-logo.png"
+              alt="TMDb logo"
+              width={100}
+              height={100}
+              className="w-14 h-auto"
+            />
+            <Image
               src="/nextjs-logo.png"
               alt="Next.js logo"
+              width={100}
+              height={100}
               className="w-10 h-auto"
             />
-            <img
+            <Image
               src="/tailwindcss-logo.png"
               alt="Tailwind logo"
+              width={100}
+              height={100}
               className="w-10 h-auto"
             />
-            <img
+            <Image
               src="/typescript-logo.png"
               alt="TypeScript logo"
+              width={100}
+              height={100}
               className="w-10 h-auto"
             />
-            <img
+            <Image
               src="/prettier-logo.png"
               alt="Prettier"
+              width={100}
+              height={100}
               className="w-10 h-auto"
             />
-            <img src="/eslint-logo.png" alt="ESLint" className="w-10 h-auto" />
+            <Image
+              src="/eslint-logo.png"
+              alt="ESLint"
+              width={100}
+              height={100}
+              className="w-10 h-auto"
+            />
           </div>
         </section>
 

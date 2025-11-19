@@ -1,5 +1,6 @@
 import { FaStar } from "react-icons/fa";
 import type { Film } from "@/app/types";
+import Image from "next/image";
 
 interface Props {
   film: Film;
@@ -11,10 +12,12 @@ export default function FilmCard({ film, gridView = true }: Props) {
     <div className="bg-charcoal mx-auto p-8 max-w-[500px] rounded-xl flex flex-col h-full">
       {/* set max-h so all images fit without cropping or stretching: */}
       <div className="max-h-[60vh] w-full flex justify-center">
-        <img
+        <Image
           src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
           alt={film.title}
-          className="max-w-full max-h-full object-contain"
+          width={500}
+          height={750}
+          className="w-full h-auto max-h-full object-contain"
         />
       </div>
 
