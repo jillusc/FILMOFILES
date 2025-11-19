@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import {
   FilmsGrid,
+  FilmsSkeleton,
   GenresSidebar,
   SearchBar,
   SorterDropdown,
@@ -107,8 +108,6 @@ export default function Page() {
 
   return (
     <main className="mx-10 mb-6 p-4 pt-6">
-      {/* ...moved here so that the page stays mounted while loading, allowing the search bar to keep its focus: */}
-      {loading && <p className="my-6 text-center">Loading films...</p>}
       <div className="flex flex-col gap-4 mb-6 lg:flex-row lg:items-center lg:justify-between">
         <SearchBar
           searchTerm={searchTerm}
@@ -131,6 +130,7 @@ export default function Page() {
           />
         </div>
         <div className="flex-1">
+          {loading && <FilmsSkeleton />}
           <FilmsGrid films={films} sortOrder={sortOrder} />
           <div className="flex justify-end mt-8">
             <button

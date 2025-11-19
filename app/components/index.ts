@@ -2,6 +2,7 @@ export { default as Accordion } from "./Accordion";
 export { default as CTABox } from "./CTABox";
 export { default as FilmCard } from "./FilmCard";
 export { default as FilmsGrid } from "./FilmsGrid";
+export { default as FilmsSkeleton } from "./FilmsSkeleton";
 export { default as Footer } from "./Footer";
 export { default as GenresSidebar } from "./GenresSidebar";
 export { default as Navbar } from "./Navbar";
