@@ -2,7 +2,7 @@ import { CTABox } from "./components";
 
 export default function Page() {
   return (
-    <main className="text-center p-6 min-h-screen bg-[url('/cinema.webp')] bg-cover bg-center bg-no-repeat">
+    <main className="text-center h-full p-6 bg-[url('/cinema.webp')] bg-cover bg-center bg-no-repeat">
       <div className="mt-25 mb-15 flex flex-col items-center gap-4">
         <h1 className="text-charcoal-bg">FILMOFILES</h1>
         <h2 className="text-charcoal-bg">Honest. Insightful. Passionate.</h2>

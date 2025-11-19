@@ -103,7 +103,7 @@ export default function AboutPage() {
           <p>
             Promotional film poster images used in this project belong to their
             respective copyright holders. Cinema background photography and the
-            popcorn image from{" "}
+            <a href="/not-found"> 404 page</a>'s popcorn image from{" "}
             <a
               href="https://pixabay.com/"
               target="_blank"
